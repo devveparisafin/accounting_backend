@@ -21,7 +21,7 @@ const allowedOrigins = [
 // 3. Middlewares
 // Enable CORS for frontend connection
 // app.use(cors({
-//   origin: process.env.NODE_ENV === 'production' ? 'https://your-production-url.com' : 'http://localhost:3000', // IMPORTANT: Match your Next.js URL
+//   origin: process.env.NODE_ENV === 'production' ? 'https://accounting-frontend-kappa.vercel.app/' : 'http://localhost:3000', // IMPORTANT: Match your Next.js URL
 //   credentials: true, // Allow cookies and authorization headers
 // }));
 app.use(cors({
