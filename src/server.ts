@@ -20,7 +20,14 @@ const allowedOrigins = [
 ];
 
 app.use(cors({
-  origin: ['http://localhost:3000', 'https://accounting-frontend-kappa.vercel.app'],
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true); // allow Postman / curl
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    } else {
+      return callback(new Error(`CORS blocked for origin: ${origin}`));
+    }
+  },
   credentials: true
 }));
 
