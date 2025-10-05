@@ -21,16 +21,15 @@ const allowedOrigins = [
 
 app.use(cors({
   origin: (origin, callback) => {
-    // Allow requests with no origin (like curl or Postman)
+    console.log('Request Origin:', origin);
     if (!origin) return callback(null, true);
-
     if (allowedOrigins.includes(origin)) {
-      callback(null, true); // allow this origin
+      return callback(null, true);
     } else {
-      callback(new Error('Not allowed by CORS')); // block other origins
+      return callback(new Error(`Origin ${origin} not allowed by CORS`));
     }
   },
-  credentials: true, // Allow cookies and auth headers
+  credentials: true,
 }));
 
 // Body parser middleware for JSON payloads
