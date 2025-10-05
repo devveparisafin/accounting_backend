@@ -14,12 +14,28 @@ connectDB();
 
 // 2. Initialize Express App
 const app = express();
-
+const allowedOrigins = [
+  'http://localhost:3000',               // Local Next.js dev
+  'https://your-production-url.com',    // Your deployed frontend URL
+];
 // 3. Middlewares
 // Enable CORS for frontend connection
+// app.use(cors({
+//   origin: process.env.NODE_ENV === 'production' ? 'https://your-production-url.com' : 'http://localhost:3000', // IMPORTANT: Match your Next.js URL
+//   credentials: true, // Allow cookies and authorization headers
+// }));
 app.use(cors({
-  origin: process.env.NODE_ENV === 'production' ? 'https://your-production-url.com' : 'http://localhost:3000', // IMPORTANT: Match your Next.js URL
-  credentials: true, // Allow cookies and authorization headers
+  origin: (origin, callback) => {
+    // Allow requests with no origin (like curl or Postman)
+    if (!origin) return callback(null, true);
+
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true); // allow this origin
+    } else {
+      callback(new Error('Not allowed by CORS')); // block other origins
+    }
+  },
+  credentials: true, // Allow cookies and auth headers
 }));
 
 // Body parser middleware for JSON payloads
