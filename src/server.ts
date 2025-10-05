@@ -16,7 +16,7 @@ connectDB();
 const app = express();
 const allowedOrigins = [
   'http://localhost:3000',               // Local Next.js dev
-  'https://your-production-url.com',    // Your deployed frontend URL
+  'https://accounting-frontend-kappa.vercel.app',    // Your deployed frontend URL
 ];
 // 3. Middlewares
 // Enable CORS for frontend connection
