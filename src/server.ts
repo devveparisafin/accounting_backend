@@ -18,12 +18,7 @@ const allowedOrigins = [
   'http://localhost:3000',               // Local Next.js dev
   'https://accounting-frontend-kappa.vercel.app',    // Your deployed frontend URL
 ];
-// 3. Middlewares
-// Enable CORS for frontend connection
-// app.use(cors({
-//   origin: process.env.NODE_ENV === 'production' ? 'https://accounting-frontend-kappa.vercel.app/' : 'http://localhost:3000', // IMPORTANT: Match your Next.js URL
-//   credentials: true, // Allow cookies and authorization headers
-// }));
+
 app.use(cors({
   origin: (origin, callback) => {
     // Allow requests with no origin (like curl or Postman)
